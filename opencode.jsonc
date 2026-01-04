@@ -15,11 +15,17 @@
       "type": "local",
       "command": ["bunx", "-y", "@sveltejs/mcp"],
     },
+    "answeroverflow": {
+      "type": "remote",
+      "url": "https://www.answeroverflow.com/mcp",
+      "enabled": true,
+    },
   },
   "tools": {
     "awesome-mcp*": false,
     "effect*": false,
     "svelte*": false,
+    "answeroverflow*": false,
   },
   "agent": {
     "dependency-evaluator": {
@@ -30,6 +36,7 @@
     "effect": {
       "tools": {
         "effect*": true,
+        "answeroverflow*": true,
       },
     },
   },
