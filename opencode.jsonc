@@ -23,20 +23,12 @@
   },
   "tools": {
     "awesome-mcp*": false,
-    "effect*": false,
     "svelte*": false,
-    "answeroverflow*": false,
   },
   "agent": {
     "dependency-evaluator": {
       "tools": {
         "awesome-mcp*": true,
-      },
-    },
-    "effect": {
-      "tools": {
-        "effect*": true,
-        "answeroverflow*": true,
       },
     },
   },
