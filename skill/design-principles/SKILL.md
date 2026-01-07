@@ -1,0 +1,1 @@
+../../vendor/claude-design-skill/skill/skill.md
