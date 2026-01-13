@@ -86,22 +86,22 @@ const program = Effect.gen(function* () {
 })
 ```
 
-### Functions Returning Effects
-```typescript
-const processUser = (userId: string) =>
-  Effect.gen(function* () {
-    const user = yield* getUser(userId)
-    return yield* processData(user)
-  })
+### Effect.fn for Functions
+Use `Effect.fn` for functions returning Effects:
 
-// With instrumentation via pipe:
-const fetchWithRetry = (url: string) =>
-  Effect.gen(function* () {
+```typescript
+const processUser = Effect.fn(function* (userId: string) {
+  const user = yield* getUser(userId)
+  return yield* processData(user)
+})
+
+// Second argument applies transformations to every call:
+const fetchWithRetry = Effect.fn(
+  function* (url: string) {
     return yield* fetchData(url)
-  }).pipe(
-    Effect.retry(Schedule.recurs(3)),
-    Effect.withSpan("fetchWithRetry")
-  )
+  },
+  Effect.retry(Schedule.recurs(3))
+)
 ```
 
 ### Pipe for Instrumentation
@@ -206,11 +206,10 @@ class Users extends Effect.Service<Users>()("@app/Users", {
     const http = yield* HttpClient.HttpClient
 
     return {
-      findById: (id: UserId) =>
-        Effect.gen(function* () {
-          const response = yield* http.get(`/users/${id}`)
-          return yield* HttpClientResponse.schemaBodyJson(User)(response)
-        }),
+      findById: Effect.fn(function* (id: UserId) {
+        const response = yield* http.get(`/users/${id}`)
+        return yield* HttpClientResponse.schemaBodyJson(User)(response)
+      }),
     }
   }),
 }) {}
@@ -814,7 +813,7 @@ it.prop("addition is commutative", [Schema.Int, Schema.Int], (a, b) =>
 - Forgetting `Result.isWaiting` checks in UI (shows stale data during refetch)
 
 ### Prefer
-- Functions returning `Effect.gen` for effectful operations
+- `Effect.fn` over plain functions returning Effects
 - `Schema.TaggedError` over plain Error classes
 - Branded types over raw primitives
 - Services/Layers over global singletons
