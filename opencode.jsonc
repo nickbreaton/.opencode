@@ -17,6 +17,7 @@
     "svelte": {
       "type": "local",
       "command": ["bunx", "-y", "@sveltejs/mcp"],
+      "enabled": false,
     },
     "answeroverflow": {
       "type": "remote",

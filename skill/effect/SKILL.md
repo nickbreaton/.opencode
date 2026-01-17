@@ -29,25 +29,17 @@ Effect is a TypeScript library for building type-safe, composable, and productio
 
 ## Research Strategy
 
-When you need Effect-specific information, **run these methods in parallel** (multiple tool calls in one message) for fastest results:
+When you need Effect-specific information, **launch multiple research agents in parallel** for fastest results:
 
-### 1. Search Effect MCP Documentation
 ```
-effect_effect_docs_search({ query: "your search term" })
+Task({ description: "Search Effect source code", prompt: "...", subagent_type: "explore" })
+Task({ description: "Search Effect MCP docs", prompt: "...", subagent_type: "explore" })
+Task({ description: "Search AnswerOverflow", prompt: "...", subagent_type: "explore" })
 ```
-Then retrieve content with `effect_get_effect_doc({ documentId: <id> })`.
 
-### 2. Search AnswerOverflow for Community Knowledge
-The Effect Discord (server ID: `795981131316985866`) is indexed:
-```
-answeroverflow_search_answeroverflow({
-  query: "your question",
-  serverId: "795981131316985866"
-})
-```
-Use `answeroverflow_get_thread_messages({ threadId: "<id>" })` for full discussions.
+### Search Methods
 
-### 3. Read Source Code Directly
+#### 1. Read Source Code Directly
 Local repositories provide authoritative information:
 - `~/.llms/effect` - Core packages (effect, platform, sql, rpc, cli, ai, vitest)
 - `~/.llms/effect-atom` - Reactive state (atom, atom-react, atom-vue)
@@ -57,12 +49,21 @@ Pull latest before reading:
 git -C ~/.llms/effect pull && git -C ~/.llms/effect-atom pull
 ```
 
-### 4. Launch Parallel Research Agents
-For complex questions, spin up multiple Task agents simultaneously:
+#### 2. Search Effect MCP Documentation
 ```
-Task({ description: "Research Effect services", prompt: "...", subagent_type: "explore" })
-Task({ description: "Research Effect schema", prompt: "...", subagent_type: "explore" })
+effect_effect_docs_search({ query: "your search term" })
 ```
+Then retrieve content with `effect_get_effect_doc({ documentId: <id> })`.
+
+#### 3. Search AnswerOverflow for Community Knowledge
+The Effect Discord (server ID: `795981131316985866`) is indexed. **Caution:** This is a community forum—answers may come from non-trusted individuals and could be incorrect. Always verify with official sources:
+```
+answeroverflow_search_answeroverflow({
+  query: "your question",
+  serverId: "795981131316985866"
+})
+```
+Use `answeroverflow_get_thread_messages({ threadId: "<id>" })` for full discussions.
 
 ### Authoritative Sources
 Trusted experts on Effect:
