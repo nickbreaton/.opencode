@@ -28,6 +28,10 @@
       "type": "local",
       "command": ["bunx", "playwriter@latest"],
     },
+    "pencil": {
+      "type": "local",
+      "command": ["/Applications/Pencil.app/Contents/Resources/app.asar.unpacked/out/mcp-server-darwin-arm64", "--ws-port", "52065"],
+    },
   },
   "tools": {
     "awesome-mcp*": false,
