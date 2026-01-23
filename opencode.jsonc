@@ -8,7 +8,7 @@
     "awesome-mcp": {
       "type": "remote",
       "url": "https://www.context-awesome.com/api/mcp",
-      "oauth": false,
+      "enabled": false,
     },
     "effect": {
       "type": "local",
