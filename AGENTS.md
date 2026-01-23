@@ -1,1 +1,0 @@
-- **Effect skill**: Always invoke `skill("effect")` when Effect, @effect/* packages, or Effect patterns are mentioned
